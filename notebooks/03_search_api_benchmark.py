@@ -31,12 +31,12 @@ import httpx
 # %%
 ROOT = Path(_setup.__file__).resolve().parent.parent
 proc = subprocess.Popen(
-    ["uvicorn", "app.main:app", "--port", "8000", "--log-level", "warning"],
+    ["uvicorn", "app.main:app", "--port", "8001", "--log-level", "warning"],
     cwd=str(ROOT),
 )
 
 # Đợi server up + warm (Searcher.from_corpus loads embeddings + indexes 1000 docs)
-URL = "http://localhost:8000"
+URL = "http://localhost:8001"
 for _ in range(60):
     try:
         r = httpx.get(f"{URL}/healthz", timeout=2.0)
